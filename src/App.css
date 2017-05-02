@@ -1,0 +1,89 @@
+body {
+  background: #000 url("background.jpg") no-repeat;
+}
+.App-header {
+  color: #fff;
+  padding-bottom: 24px;
+}
+
+.omdb-link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.omdb-link:hover {
+  text-decoration: none;
+}
+
+@media (min-width: 544px) {
+  .search-box {
+    margin-top: 22px;
+  }
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.search-body {
+  background-color: #222;
+  padding: 0;
+}
+
+.search-input-box {
+  background: transparent;
+  border: none;
+  color: #fff;
+  width: 100%;
+  background: 0 0;
+  border-bottom: solid 1px #fff;
+}
+
+.search-details {
+  color: #fff;
+}
+
+.search-details h2 {
+  text-transform: uppercase;
+}
+
+.not-found {
+  text-align: center;
+  color: #fff;
+}
+
+.poster {
+  width: 100%;
+}
+
+.poster-container {
+  padding-left: 0px;
+}
+
+.actors h4, .genres h4 {
+  color: #66AFE9;
+  margin-bottom: 4px;
+}
+
+.details-label {
+  color: #01D277;
+  font-size: 18px;
+}
+
+.actors, .genres, .release-details {
+  margin-top: 20px;
+}
+
+.meta-data {
+  display: block;
+  font-size: 20px;
+}
+
+.bot-border {
+  border-bottom: 1px solid #fff;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
