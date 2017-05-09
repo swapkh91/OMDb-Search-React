@@ -96,7 +96,6 @@ class App extends Component {
   }
 
   handleSubmit(query){
-    console.log(query);
     if (!query) {
       return;
     }
@@ -113,7 +112,6 @@ class App extends Component {
         return result.json()
       })
       .then((json) => {
-        //console.log(json.Search);
         this.setState({
           options: json.Search
         })
