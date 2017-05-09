@@ -35,8 +35,29 @@ body {
   border: none;
   color: #fff;
   width: 100%;
-  background: 0 0;
-  border-bottom: solid 1px #fff;
+  margin-top: 22px;
+}
+
+.bootstrap-typeahead-input-main {
+  border: none;
+  border-bottom: 1px solid #666;
+}
+
+.bootstrap-typeahead-input-hint {
+  background-color: transparent;
+}
+
+.form-control {
+  color: #fff;
+}
+
+.dropdown-menu {
+  background-color: #000;
+  width: 100%;
+}
+
+.dropdown-menu>li>a {
+  color: #888;
 }
 
 .search-details {

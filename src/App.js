@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import {AsyncTypeahead} from 'react-bootstrap-typeahead';
 const fetch = require('isomorphic-fetch');
 
 class SearchBody extends Component {
@@ -50,9 +51,10 @@ class App extends Component {
       searchTitle: '',
       defaultUrl: 'http://www.omdbapi.com/?t=arrival'
     };
-
-    this.handleChange = this.handleChange.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.fetchApiData = this.fetchApiData.bind(this);
+    this.renderMenuItemChildren = this.renderMenuItemChildren.bind(this);
   }
 
   componentDidMount() {
@@ -60,7 +62,7 @@ class App extends Component {
   }
 
   fetchApiData(url){
-  	fetch(url) 
+    fetch(url) 
       .then((result) => {
         return result.json()
       })
@@ -93,15 +95,37 @@ class App extends Component {
       })
   }
 
-  handleSubmit(event){
-    event.preventDefault();
-    this.fetchApiData(`http://www.omdbapi.com/?t=${this.state.searchTitle}`);
+  handleSubmit(query){
+    console.log(query);
+    if (!query) {
+      return;
+    }
+    this.fetchApiData(`http://www.omdbapi.com/?t=${query}`);
   }
 
-  handleChange(event){
-    this.setState({
-      searchTitle: event.target.value
-    });
+  handleSearch(query) {
+    if (!query) {
+      return;
+    }
+
+    fetch(`http://www.omdbapi.com/?s=${query}`)
+      .then((result) => {
+        return result.json()
+      })
+      .then((json) => {
+        //console.log(json.Search);
+        this.setState({
+          options: json.Search
+        })
+      });
+  }
+
+  renderMenuItemChildren(option, props, index) {
+    return (
+      <div key={option.imdbID} onClick={this.handleSubmit.bind(this, option.Title)}>
+        <span>{option.Title}</span>
+      </div>
+    );
   }
 
   render() {
@@ -114,9 +138,18 @@ class App extends Component {
 	              <h1><a href="http://www.omdbapi.com/" className="omdb-link" title="The Open Movie Database">OMDb</a></h1>
 	            </div>
 	            <div className="col-xs-12 col-sm-6 col-lg-7">
-	              <form onSubmit={this.handleSubmit} className="search-box">
-	                <input className="form-control search-input-box" type="text" value={this.state.searchTitle} onChange={this.handleChange} placeholder='Search Title' />
-	              </form>
+	              
+                  <AsyncTypeahead
+                    ref="typeahead"
+                    {...this.state}
+                    labelKey="Title"
+                    onSearch={this.handleSearch}
+                    options={this.state.options}
+                    placeholder='Search Title'
+                    className="search-input-box"
+                    renderMenuItemChildren={this.renderMenuItemChildren}
+                  />
+	                
 	            </div>
 	          </div>
 	        </div>
